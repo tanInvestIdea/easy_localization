@@ -37,7 +37,7 @@ class Localization {
     return translations == null ? false : true;
   }
 
-  String tr(
+  String get(
     String key, {
     List<String>? args,
     Map<String, String>? namedArgs,
@@ -207,7 +207,7 @@ class Localization {
     return resource;
   }
 
-  bool exists(String key){
+  bool exists(String key) {
     return _translations?.get(key) != null;
   }
 }

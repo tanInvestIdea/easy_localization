@@ -14,13 +14,13 @@ import 'public.dart' as ez;
 /// ```
 extension TextTranslateExtension on Text {
   /// {@macro tr}
-  Text tr(
+  Text get(
           {List<String>? args,
           BuildContext? context,
           Map<String, String>? namedArgs,
           String? gender}) =>
       Text(
-          ez.tr(
+          ez.get(
             data ?? '',
             context: context,
             args: args,
@@ -81,13 +81,13 @@ extension TextTranslateExtension on Text {
 /// ```
 extension StringTranslateExtension on String {
   /// {@macro tr}
-  String tr({
+  String get({
     List<String>? args,
     Map<String, String>? namedArgs,
     String? gender,
     BuildContext? context,
   }) =>
-      ez.tr(this,
+      ez.get(this,
           context: context, args: args, namedArgs: namedArgs, gender: gender);
 
   bool trExists() => ez.trExists(this);
@@ -198,7 +198,7 @@ extension BuildContextEasyLocalizationExtension on BuildContext {
   /// Text(context.tr('msg_mixed', args: ['Easy localization'], namedArgs: {'lang': 'Dart'}), // args and namedArgs
   /// Text(context.tr('gender', gender: _gender ? "female" : "male"), // gender
   /// ```
-  String tr(
+  String get(
     String key, {
     List<String>? args,
     Map<String, String>? namedArgs,
@@ -210,7 +210,7 @@ extension BuildContextEasyLocalizationExtension on BuildContext {
       throw const LocalizationNotFoundException();
     }
 
-    return localization.tr(
+    return localization.get(
       key,
       args: args,
       namedArgs: namedArgs,

@@ -31,7 +31,7 @@ import 'localization.dart';
 /// Text('gender').tr(gender: _gender ? "female" : "male"), // gender
 /// ```
 /// {@endtemplate}
-String tr(
+String get(
   String key, {
   BuildContext? context,
   List<String>? args,
@@ -40,14 +40,13 @@ String tr(
 }) {
   return context != null
       ? Localization.of(context)!
-          .tr(key, args: args, namedArgs: namedArgs, gender: gender)
+          .get(key, args: args, namedArgs: namedArgs, gender: gender)
       : Localization.instance
-          .tr(key, args: args, namedArgs: namedArgs, gender: gender);
+          .get(key, args: args, namedArgs: namedArgs, gender: gender);
 }
 
 bool trExists(String key) {
-  return Localization.instance
-      .exists(key);
+  return Localization.instance.exists(key);
 }
 
 /// {@template plural}

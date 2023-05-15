@@ -42,7 +42,7 @@ class MyWidget extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          const Text('test').tr(),
+          const Text('test').get(),
           const Text('day').plural(1),
         ],
       ),
@@ -56,7 +56,7 @@ class MyLocalizedWidget extends StatelessWidget {
   @override
   Widget build(context) {
     _context = context;
-    _contextTranslationValue = context.tr('test');
+    _contextTranslationValue = context.get('test');
     _contextPluralValue = context.plural('day', 1);
 
     return Scaffold(
@@ -104,12 +104,12 @@ void main() async {
         final pluralFinder = find.text('1 day');
         expect(pluralFinder, findsOneWidget);
 
-        expect(tr('test'), 'test');
+        expect(get('test'), 'test');
         expect(plural('day', 1), '1 day');
         expect(plural('day', 2), '2 days');
         expect(plural('day', 3), '3 other days');
 
-        expect('test'.tr(), 'test');
+        expect('test'.get(), 'test');
         expect('day'.plural(1), '1 day');
       });
     },
@@ -137,7 +137,7 @@ void main() async {
         expect(trFinder, findsOneWidget);
         final pluralFinder = find.text('1 day');
         expect(pluralFinder, findsOneWidget);
-        expect(tr('test'), 'test');
+        expect(get('test'), 'test');
         expect(plural('day', 1), '1 day');
         expect(plural('day', 2), '2 days');
         expect(plural('day', 3), '3 other days');
@@ -167,7 +167,7 @@ void main() async {
         final pluralFinder = find.text('1 day');
         expect(pluralFinder, findsOneWidget);
 
-        expect(tr('test'), 'test');
+        expect(get('test'), 'test');
         expect(plural('day', 1), '1 day');
         expect(plural('day', 2), '2 days');
         expect(plural('day', 3), '3 other days');
@@ -220,7 +220,7 @@ void main() async {
         final pluralFinder = find.text('1 day');
         expect(pluralFinder, findsOneWidget);
 
-        expect(tr('test'), 'test');
+        expect(get('test'), 'test');
         expect(plural('day', 1), '1 day');
         expect(plural('day', 2), '2 days');
         expect(plural('day', 3), '3 other days');
@@ -259,7 +259,7 @@ void main() async {
         var pluralFinder = find.text('1 day');
         expect(pluralFinder, findsOneWidget);
 
-        expect(tr('test'), 'test');
+        expect(get('test'), 'test');
         expect(plural('day', 1), '1 day');
         expect(plural('day', 2), '2 days');
         expect(plural('day', 3), '3 other days');
@@ -323,7 +323,7 @@ void main() async {
         expect(pluralFinder, findsOneWidget);
 
         expect(Localization.of(_context), isInstanceOf<Localization>());
-        expect(tr('test'), 'اختبار');
+        expect(get('test'), 'اختبار');
         expect(plural('day', 1), '1 يوم');
         expect(plural('day', 2), '2 أيام');
         expect(plural('day', 3), '3 أيام');

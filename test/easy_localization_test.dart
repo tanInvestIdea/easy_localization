@@ -125,20 +125,20 @@ void main() {
       expect(
           Localization.load(const Locale('en'), translations: r1.translations),
           true);
-      expect(Localization.instance.tr('path'), 'path/en.json');
+      expect(Localization.instance.get('path'), 'path/en.json');
     });
 
     test('load() respects useOnlyLangCode', () async {
       expect(
           Localization.load(const Locale('en'), translations: r1.translations),
           true);
-      expect(Localization.instance.tr('path'), 'path/en.json');
+      expect(Localization.instance.get('path'), 'path/en.json');
 
       expect(
           Localization.load(const Locale('en', 'us'),
               translations: r2.translations),
           true);
-      expect(Localization.instance.tr('path'), 'path/en-us.json');
+      expect(Localization.instance.get('path'), 'path/en-us.json');
     });
 
     test('controller loads saved locale', () async {
@@ -258,65 +258,65 @@ void main() {
             fallbackTranslations: r.fallbackTranslations);
       });
       test('finds and returns resource', () {
-        expect(Localization.instance.tr('test'), 'test');
+        expect(Localization.instance.get('test'), 'test');
       });
 
       test('can resolve resource in any nest level', () {
         expect(
-          Localization.instance.tr('nested.super.duper.nested'),
+          Localization.instance.get('nested.super.duper.nested'),
           'nested.super.duper.nested',
         );
       });
       test('can resolve resource that has a key with dots', () {
         expect(
-          Localization.instance.tr('nested.but.not.nested'),
+          Localization.instance.get('nested.but.not.nested'),
           'nested but not nested',
         );
       });
 
       test('won\'t fail for missing key (no periods)', () {
         expect(
-          Localization.instance.tr('Processing'),
+          Localization.instance.get('Processing'),
           'Processing',
         );
       });
 
       test('won\'t fail for missing key with periods', () {
         expect(
-          Localization.instance.tr('Processing.'),
+          Localization.instance.get('Processing.'),
           'Processing.',
         );
       });
 
       test('can resolve linked locale messages', () {
-        expect(Localization.instance.tr('linked'), 'this is linked');
+        expect(Localization.instance.get('linked'), 'this is linked');
       });
 
       test('can resolve linked locale messages and apply modifiers', () {
-        expect(Localization.instance.tr('linkAndModify'),
+        expect(Localization.instance.get('linkAndModify'),
             'this is linked and MODIFIED');
       });
 
       test('can resolve multiple linked locale messages and apply modifiers',
           () {
-        expect(Localization.instance.tr('linkMany'), 'many Locale messages');
+        expect(Localization.instance.get('linkMany'), 'many Locale messages');
       });
 
       test('can resolve linked locale messages with brackets', () {
-        expect(Localization.instance.tr('linkedWithBrackets'),
+        expect(Localization.instance.get('linkedWithBrackets'),
             'linked with brackets.');
       });
 
       test('can resolve any number of nested arguments', () {
         expect(
             Localization.instance
-                .tr('nestedArguments', args: ['a', 'argument', '!']),
+                .get('nestedArguments', args: ['a', 'argument', '!']),
             'this is a nested argument!');
       });
 
       test('can resolve nested named arguments', () {
         expect(
-            Localization.instance.tr('nestedNamedArguments', namedArgs: {
+            Localization.instance.get('nestedNamedArguments', namedArgs: {
               'firstArg': 'this',
               'secondArg': 'named argument',
               'thirdArg': '!'
@@ -325,12 +325,12 @@ void main() {
       });
 
       test('returns missing resource as provided', () {
-        expect(Localization.instance.tr('test_missing'), 'test_missing');
+        expect(Localization.instance.get('test_missing'), 'test_missing');
       });
 
       test('reports missing resource', overridePrint(() {
         printLog = [];
-        expect(Localization.instance.tr('test_missing'), 'test_missing');
+        expect(Localization.instance.get('test_missing'), 'test_missing');
         final logIterator = printLog.iterator;
         logIterator.moveNext();
         expect(logIterator.current,
@@ -342,33 +342,33 @@ void main() {
 
       test('uses fallback translations', overridePrint(() {
         printLog = [];
-        expect(Localization.instance.tr('test_missing_fallback'), 'fallback!');
+        expect(Localization.instance.get('test_missing_fallback'), 'fallback!');
       }));
 
       test('reports missing resource with fallback', overridePrint(() {
         printLog = [];
-        expect(Localization.instance.tr('test_missing_fallback'), 'fallback!');
+        expect(Localization.instance.get('test_missing_fallback'), 'fallback!');
         expect(printLog.first,
             contains('Localization key [test_missing_fallback] not found'));
       }));
 
       test('returns resource and replaces argument', () {
         expect(
-          Localization.instance.tr('test_replace_one', args: ['one']),
+          Localization.instance.get('test_replace_one', args: ['one']),
           'test replace one',
         );
       });
       test('returns resource and replaces argument in any nest level', () {
         expect(
           Localization.instance
-              .tr('nested.super.duper.nested_with_arg', args: ['what a nest']),
+              .get('nested.super.duper.nested_with_arg', args: ['what a nest']),
           'nested.super.duper.nested_with_arg what a nest',
         );
       });
 
       test('returns resource and replaces argument sequentially', () {
         expect(
-          Localization.instance.tr('test_replace_two', args: ['one', 'two']),
+          Localization.instance.get('test_replace_two', args: ['one', 'two']),
           'test replace one two',
         );
       });
@@ -381,7 +381,7 @@ void main() {
 
       test('return resource and replaces named argument', () {
         expect(
-          Localization.instance.tr('test_replace_named',
+          Localization.instance.get('test_replace_named',
               namedArgs: {'arg1': 'one', 'arg2': 'two'}),
           'test named replace one two',
         );
@@ -390,7 +390,7 @@ void main() {
       test('returns resource and replaces named argument in any nest level',
           () {
         expect(
-          Localization.instance.tr('nested.super.duper.nested_with_named_arg',
+          Localization.instance.get('nested.super.duper.nested_with_named_arg',
               namedArgs: {'arg': 'what a nest'}),
           'nested.super.duper.nested_with_named_arg what a nest',
         );
@@ -398,11 +398,11 @@ void main() {
 
       test('gender returns the correct resource', () {
         expect(
-          Localization.instance.tr('gender', gender: 'male'),
+          Localization.instance.get('gender', gender: 'male'),
           'Hi man ;)',
         );
         expect(
-          Localization.instance.tr('gender', gender: 'female'),
+          Localization.instance.get('gender', gender: 'female'),
           'Hello girl :)',
         );
       });
@@ -410,12 +410,12 @@ void main() {
       test('gender returns the correct resource and replaces args', () {
         expect(
           Localization.instance
-              .tr('gender_and_replace', gender: 'male', args: ['one']),
+              .get('gender_and_replace', gender: 'male', args: ['one']),
           'Hi one man ;)',
         );
         expect(
           Localization.instance
-              .tr('gender_and_replace', gender: 'female', args: ['one']),
+              .get('gender_and_replace', gender: 'female', args: ['one']),
           'Hello one girl :)',
         );
       });
@@ -543,7 +543,7 @@ void main() {
       // });
       group('string', () {
         test('tr', () {
-          expect('test'.tr(), 'test');
+          expect('test'.get(), 'test');
         });
 
         test('trExists', () {
@@ -566,7 +566,7 @@ void main() {
       // });
       group('string', () {
         test('tr', () {
-          expect(tr('test'), 'test');
+          expect(get('test'), 'test');
         });
         test('plural', () {
           expect(plural('day', 0), '0 days');

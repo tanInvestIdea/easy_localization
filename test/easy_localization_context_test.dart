@@ -32,7 +32,7 @@ class MyWidget extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          const Text('test').tr(),
+          const Text('test').get(),
           const Text('day').plural(1),
         ],
       ),
